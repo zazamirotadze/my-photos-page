@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Button from './Button'
 import { useParams } from 'react-router-dom';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import {FaWindowClose} from "react-icons/fa";
 import Burger from './Burger';
 
 const Buttons = () => {
