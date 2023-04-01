@@ -10,7 +10,7 @@ const Buttons = () => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const params = useParams();
     useEffect(()=>{
-        fetch("http://localhost:3001/data")
+        fetch("https://gold-angry-earthworm.cyclic.app/data")
         .then((x) => x.json())
         .then((y) =>  {
             const sortedData = y.sort((a, b) => a.name.localeCompare(b.name));
