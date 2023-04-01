@@ -1,0 +1,275 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.App {
+  padding: 3rem 1rem;
+  max-width: 125rem;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+html {
+  font-size: 16px;
+}
+
+.photo {
+  width: 19rem;
+  height: 25rem;
+  border: 1px solid gray;
+  background-color: rgb(236, 231, 231);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transition: all 0.3s ease-in-out;
+}
+.photo :active, .photo:hover {
+  background-color: rgb(236, 231, 231);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(0, 0, 0, 0.35) 0px -2px 6px 0px inset;
+}
+.photo > div {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo > div > img {
+  max-height: 100%;
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.photo > p {
+  font-size: 1rem;
+  color: rgb(65, 64, 64);
+  text-align: center;
+}
+
+.photo-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.button {
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: gray;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.button:hover, .button:active {
+  background-color: rgb(236, 231, 231);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(0, 0, 0, 0.35) 0px -2px 6px 0px inset;
+}
+@media (max-width: 900px) {
+  .button {
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+    margin: 5px 10px;
+  }
+}
+
+.buttons {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+}
+
+.details {
+  text-align: center;
+  padding: 2rem;
+}
+.details > div {
+  margin: 0 auto;
+  width: 90%;
+  height: 90vw;
+  max-width: 40rem;
+  max-height: 40rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 15px ridge rgb(19, 71, 19);
+  background-color: rgb(236, 231, 231);
+}
+.details > div > img {
+  max-height: 100%;
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.details > div > img:hover {
+  transform: scale(1.5);
+}
+.details > h2 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  color: black;
+}
+@media (max-width: 900px) {
+  .details > h2 {
+    font-size: 2rem;
+  }
+}
+
+.languages {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.languages > span:hover {
+  cursor: pointer;
+}
+.languages > div {
+  border: 1px solid gray;
+  padding: 10px 40px;
+  position: absolute;
+  top: 100%;
+  transform: translate(-30%) translateY(10%);
+  z-index: 1;
+  background-color: white;
+  display: none;
+}
+.languages > div div {
+  border: 1px solid rgb(236, 231, 231);
+  cursor: pointer;
+  padding: 3px 5px;
+  text-align: center;
+  margin-top: 5px;
+  transition: all 0.3s ease-in-out;
+}
+.languages > div div:hover, .languages > div div:active {
+  background-color: rgb(236, 231, 231);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(0, 0, 0, 0.35) 0px -2px 6px 0px inset;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  cursor: pointer;
+}
+
+.isOpen {
+  display: block !important;
+  animation: fade-in 0.9s;
+}
+
+.fadeOut {
+  display: block !important;
+  animation: fade-out 1s;
+}
+
+.burger-menu {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.rotate-menu {
+  transform: skewY(-50deg) rotateY(-90deg);
+}
+
+.burger-container {
+  position: relative;
+}
+
+.close-icon {
+  transform: skewY(0deg) rotateY(0deg);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.rotate-close {
+  transform: skewY(50deg) rotateY(-90deg);
+  transition: transform 0.5s ease;
+}
+
+.menu {
+  background-color: rgb(236, 231, 231);
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 1s ease-in-out;
+  transform: translateX(-20%);
+}
+
+.openedMenu {
+  max-height: 2000px;
+}
+
+.pegination-list {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 auto;
+}
+.pegination-list > div {
+  transition: all 0.3s ease-in-out;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid gray;
+  color: black;
+}
+.pegination-list > div:hover, .pegination-list > div:active {
+  background-color: rgb(236, 231, 231);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(0, 0, 0, 0.35) 0px -2px 6px 0px inset;
+}
+
+.removeDefaultLinkStyle {
+  color: inherit;
+  text-decoration: none;
+}
+
+.selectedBtn {
+  background-color: rgb(236, 231, 231);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(0, 0, 0, 0.35) 0px -2px 6px 0px inset;
+}/*# sourceMappingURL=index.css.map */
