@@ -34,6 +34,11 @@ html {
   font-size: 16px;
 }
 
+.loader {
+  color: rgb(65, 64, 64);
+  margin: 5rem auto;
+}
+
 .photo {
   width: 19rem;
   height: 25rem;

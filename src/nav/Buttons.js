@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import Button from './Button'
 import { useParams } from 'react-router-dom';
 import Burger from './Burger';
-
+import { PhotosPageContext } from '../context/Photos-page-context';
 const Buttons = () => {
-    const [namesArray, setNamesArray] = useState([])
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const params = useParams();
+    const myContextValue = useContext(PhotosPageContext);
+    const fetchNamesArrayData = myContextValue.fetchNamesArrayData
     useEffect(()=>{
         fetch("https://gold-angry-earthworm.cyclic.app/data")
         .then((x) => x.json())
@@ -18,7 +19,7 @@ const Buttons = () => {
               nameGeo: item.nameGeo
                 };
             })
-            setNamesArray(newArray)
+            fetchNamesArrayData(newArray)
         })
     },[])
     useEffect(() => {
@@ -30,21 +31,24 @@ const Buttons = () => {
     
         return () => window.removeEventListener("resize", handleResize);
       }, []);
-
-    const renderButtons = namesArray.map((element)=> 
+    const renderButtons = myContextValue.namesArray.map((element)=> 
         <Button 
             key={element.name} 
             name={element.name} 
             nameGeo={element.nameGeo} 
             params={params} 
+            fetchDetailData={myContextValue.fetchDetailData}
         />)
-
-
   return (
-        <div className='buttons' >
-            { screenWidth > 900 &&  renderButtons} 
-            { screenWidth <= 900 && <Burger>{renderButtons}</Burger>}
-        </div>
+    <div className='buttons'>
+      { 
+        ((myContextValue.namesArray.length && myContextValue.currentPageData.length) || (myContextValue.namesArray.length && params.id && Object.keys(myContextValue.detailData).length > 0 ))
+        ? ( 
+          (screenWidth > 900 && renderButtons) || (screenWidth <= 900 && <Burger>{renderButtons}</Burger>)
+        )
+        : null
+      }
+    </div>
   )
 }
 

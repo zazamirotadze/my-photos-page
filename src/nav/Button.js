@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Button = ({name, nameGeo, params, closeMenu}) => {
+const Button = ({name, nameGeo, params, closeMenu, fetchDetailData}) => {
   const modifiedName = name.toLowerCase().replace(/\s+/g, '')
   const buttonClass = `${modifiedName === params.categoryName ? "button selectedBtn" : "button" }`
   const languageParam =  params.lang === "en" ? "en" : "ka"
@@ -9,6 +9,7 @@ const Button = ({name, nameGeo, params, closeMenu}) => {
    <Link 
         to={`/${modifiedName}/${languageParam}`}  
         className='removeDefaultLinkStyle' 
+        onClick={()=>fetchDetailData([])}
     >
         <div className={buttonClass} >
             { params.lang === "en" ? name : nameGeo }

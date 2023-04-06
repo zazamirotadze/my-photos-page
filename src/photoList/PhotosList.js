@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import React from 'react'
 import Photo from "./Photo";
 import { useParams } from 'react-router-dom';
 import Pegination from "./Pegination";
+import { CircleLoader } from "react-spinners";
+import { PhotosPageContext } from "../context/Photos-page-context";
+
 const PhotosList = () => {
   const [photosData, setPhotosData] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
   const postPerPage = 9
-  const [currentPageData, setCurrentPageData] = useState([])
   const params = useParams();
-  
+
+  const myContextValue = useContext(PhotosPageContext);
   function changeCurrentPage(number) {
     setCurrentPage(number)
   }
@@ -26,16 +29,18 @@ const PhotosList = () => {
       const lastPostIndex = currentPage * postPerPage
       const firstPostIndex = lastPostIndex - postPerPage
       const currentPosts = photosData.data.slice(firstPostIndex, lastPostIndex)
-      setCurrentPageData((currentPosts))
+      myContextValue.fetchCurrentPageData(currentPosts)
     }
   }, [currentPage, photosData.data, postPerPage])
 
-  const renderPhotos = currentPageData.map((element)=> 
-    <Photo key={element.id} data={element} params={params} />)
+  const renderPhotos = myContextValue.currentPageData.map((element)=> 
+    <Photo key={element.id} data={element} params={params} fetchCurrentPageData={myContextValue.fetchCurrentPageData} />)
   return (
     <>
+    { (myContextValue.currentPageData.length !== 0  && myContextValue.namesArray.length !== 0) ? 
+    (<>
     <div className="photo-list">
-      {currentPageData.length > 0 && renderPhotos} 
+      {renderPhotos} 
     </div>
     {photosData.data && 
       <Pegination 
@@ -44,6 +49,7 @@ const PhotosList = () => {
         currentPage={currentPage}
         changeCurrentPage={changeCurrentPage} 
       />}
+      </>):<CircleLoader className='loader' />}
     </>
   )
 }
