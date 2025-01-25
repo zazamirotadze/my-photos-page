@@ -9,7 +9,7 @@ const Buttons = () => {
     const myContextValue = useContext(PhotosPageContext);
     const fetchNamesArrayData = myContextValue.fetchNamesArrayData
     useEffect(()=>{
-        fetch("https://gold-angry-earthworm.cyclic.app/data")
+        fetch("https://my-photos-api.onrender.com/data")
         .then((x) => x.json())
         .then((y) =>  {
             const sortedData = y.sort((a, b) => a.name.localeCompare(b.name));

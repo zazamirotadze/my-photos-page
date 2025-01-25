@@ -6,7 +6,7 @@ const Details = () => {
   const params = useParams();
   const myContextValue = useContext(PhotosPageContext);
   useEffect(()=>{
-    fetch(`https://gold-angry-earthworm.cyclic.app/data/${params.id}`)
+    fetch(`https://my-photos-api.onrender.com/data/${params.id}`)
     .then((x) => x.json())
     .then((y) => myContextValue.fetchDetailData(y) )
   },[params.id])

@@ -18,7 +18,7 @@ const PhotosList = () => {
   }
 
   useEffect(()=>{
-    fetch(`https://gold-angry-earthworm.cyclic.app/${params.categoryName?params.categoryName:"all"}`)
+    fetch(`https://my-photos-api.onrender.com/${params.categoryName?params.categoryName:"all"}`)
     .then((x) => x.json())
     .then((y) => setPhotosData(y) )
     changeCurrentPage(1)
